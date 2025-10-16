@@ -6,6 +6,10 @@
 ``` shell
 git clone https://github.com/geekincode/mid360_Lidar_IMU_Init.git
 ```
+### 2. 安装第三方库
+```
+bash sh/download_thirdparty.sh 
+```
 ### 2. 参考运行流程
 [README_ros1.md](doc/README_ros1.md)
 
