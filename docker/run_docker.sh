@@ -42,5 +42,5 @@ docker run --privileged -it \
     --env="ROS_MASTER_URI=$ROS_MASTER_URI" \
     --env="ROS_IP=$ROS_IP" \
     --env="KBUILD_NOPEDANTIC=1" \
-    mid360_lidar_imu_init:v2.0 \
+    mid360_lidar_imu_init:v2.2 \
     /bin/bash

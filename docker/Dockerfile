@@ -116,7 +116,6 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
 RUN chmod 777 /root/catkin_ws/docker/ros_entrypoint.sh
 
 WORKDIR /root/catkin_ws
-COPY ./docker /root/catkin_ws/
 
 ENTRYPOINT ["./docker/ros_entrypoint.sh"]
 CMD ["bash"]
