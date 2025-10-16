@@ -1,53 +1,33 @@
-mid360雷达_IMU校准
+# Lidar-IMU联合标定
 
-环境为：ubuntu20.04;ROS1 noetic
-1. 安装Livox-SDK2
-1.1. 安装CMake
+本项目基于ROS1 noetic环境完成，ROS2 Humble环境请参考docker开发。
+
+### 1. 克隆本项目
 ```
-sudo apt install cmake
+https://github.com/geekincode/mid360_Lidar_IMU_Init.git
 ```
-1.2. 安装编译Livox-SDK2
+### 2. 参考运行流程
+[README_ros1.md](doc/README_ros1.md)
+
+
+## Docker运行
+
+### 1. 构建Docker镜像
 ```
-git clone https://github.com/Livox-SDK/Livox-SDK2.git
-cd ./Livox-SDK2/
-mkdir build && cd build
-cmake .. && make -j
-sudo make install
-```
-2. 下载livox_ros_driver2源码
-```
-git clone https://github.com/Livox-SDK/livox_ros_driver2.git
-cd livox_ros_driver2
-./build.sh ROS1
+bash 
 ```
 
-3. 下载FAST_LIO源码
+### 2. 插入设备
+包括：达妙IMU TypeC-USB连接、CH341串口转USB、Livox-MID360雷达
+
+确认设备号：`/dev/ttyUSB0`(或者`/dev/ttyCH341USB0`)、`/dev/ttyACM0`
+
+给脚本添加权限
 ```
-    git clone https://github.com/hku-mars/FAST_LIO.git
-    cd FAST_LIO
-    git submodule update --init
-    cd ../..
-    catkin_make
-    source devel/setup.bash
+sudo chmod 777 docker/build_docker.sh docker/ros_entrypoint.sh docker/run_docker.sh
 ```
 
-4. source devel/setup.bash 
-
-5. 运行达妙imu的功能包
-    roslaunch dm_imu run_without_rviz.launch
-
-6. 运行imu脚本
-   bash sh/imu.sh
-
-7. source devel/setup.bash 
-
-8. 运行雷达驱动功能包
-   roslaunch livox_ros_driver2 msg_MID360.launch
-
-9. source devel/setup.bash
-
-9. 运行
-   roslaunch lidar_imu_init livox_mid360.launch 
-
-10. 运行
-    bash extract_marix.sh
+### 3.运行Docker镜像
+```
+bash docker/run_docker.sh
+```

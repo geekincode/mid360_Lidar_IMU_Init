@@ -113,15 +113,10 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && \
     bash ./sh/build.sh"
 
-# Setup entrypoint
-COPY ./src/LiDAR_IMU_Init_2/LiDAR_IMU_Init-main/docker/ros_entrypoint.sh /
-RUN sed -i 's|/opt/ros/melodic/setup.bash|/opt/ros/noetic/setup.bash|g' /ros_entrypoint.sh \
-    && chmod 755 /ros_entrypoint.sh
-
-# Fix the workspace directory path
-RUN sed -i 's|/home/catkin_ws|/root/catkin_ws|g' /ros_entrypoint.sh
+RUN chmod 777 /root/catkin_ws/docker/ros_entrypoint.sh
 
 WORKDIR /root/catkin_ws
+COPY ./docker /root/catkin_ws/
 
-ENTRYPOINT ["/ros_entrypoint.sh"]
+ENTRYPOINT ["./docker/ros_entrypoint.sh"]
 CMD ["bash"]
