@@ -3,8 +3,8 @@
 本项目基于ROS1 noetic环境完成，ROS2 Humble环境请参考docker开发。
 
 ### 1. 克隆本项目
-```
-https://github.com/geekincode/mid360_Lidar_IMU_Init.git
+``` shell
+git clone https://github.com/geekincode/mid360_Lidar_IMU_Init.git
 ```
 ### 2. 参考运行流程
 [README_ros1.md](doc/README_ros1.md)
@@ -14,7 +14,7 @@ https://github.com/geekincode/mid360_Lidar_IMU_Init.git
 
 ### 1. 构建Docker镜像
 ```
-bash 
+bash docker/build_docker.sh
 ```
 
 ### 2. 插入设备
@@ -23,11 +23,15 @@ bash
 确认设备号：`/dev/ttyUSB0`(或者`/dev/ttyCH341USB0`)、`/dev/ttyACM0`
 
 给脚本添加权限
-```
+``` shell
 sudo chmod 777 docker/build_docker.sh docker/ros_entrypoint.sh docker/run_docker.sh
 ```
 
 ### 3.运行Docker镜像
-```
+``` shell
 bash docker/run_docker.sh
+```
+若要开启新终端
+``` shell
+docker exec -it <container_id> /bin/bash
 ```
