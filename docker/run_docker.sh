@@ -2,7 +2,7 @@
 
 # Run docker container for mid360 Lidar IMU Init project
 
-CONTAINER_NAME="mid360_lidar_imu_init"
+CONTAINER_NAME="mid360_lidar_imu_init_3"
 
 # Get host IP
 HOST_IP=$(hostname -I | awk '{print $1}')
@@ -18,7 +18,7 @@ if [ $(docker container ls -a | grep -c $CONTAINER_NAME) -gt 0 ]; then
     # Check if container is running
     if [ $(docker container ls | grep -c $CONTAINER_NAME) -eq 0 ]; then
         echo "Starting stopped container..."
-        docker start $CONTAINER_NAME
+        docker start  -i $CONTAINER_NAME
     fi
     
     xhost +local:root
@@ -55,5 +55,5 @@ docker run --privileged -it \
     --env="ROS_MASTER_URI=$ROS_MASTER_URI" \
     --env="ROS_IP=$ROS_IP" \
     --env="KBUILD_NOPEDANTIC=1" \
-    mid360_lidar_imu_init:v3.0 \
+    mid360_lidar_imu_init:v2.2 \
     /bin/bash
