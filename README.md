@@ -37,5 +37,5 @@ bash docker/run_docker.sh
 ```
 若要开启新终端
 ``` shell
-docker exec -it <container_id> /bin/bash
+bash docker/run_docker.sh
 ```
