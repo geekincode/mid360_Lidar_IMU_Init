@@ -12,6 +12,8 @@ if [ -z "$ROS_DOMAIN_ID" ]; then
     echo "警告: ROS_DOMAIN_ID 未设置"
 fi
 
+source install/setup.bash 
+
 echo "调用校准服务..."
 ros2 service call /calibrate_imu dm_imu/srv/CalibrateIMU
 
