@@ -2,7 +2,7 @@
 
 # 获取当前脚本所在目录
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-file="$SCRIPT_DIR/../src/LiDAR_IMU_Init_ROS2/result/Initialization_result.txt"
+file="$SCRIPT_DIR/../src/LiDAR_IMU_Init/result/Initialization_result.txt"
 
 # 提取 Refinement Translation LiDAR to IMU (meter)
 translation=$(awk '

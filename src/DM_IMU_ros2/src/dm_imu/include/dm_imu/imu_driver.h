@@ -15,8 +15,6 @@
 #include <cmath>
 #include "dm_imu/bsp_crc.h"
 #include "std_msgs/msg/float64_multi_array.hpp"
-#include <rcl_interfaces/msg/set_parameters_result.hpp>
-#include "dm_imu/srv/calibrate_imu.hpp"
 
 #define IMU_SERIAL_DEBUG 0      //{0:none, 1:all_Rxdata}
 
@@ -96,20 +94,9 @@ namespace dmbot_serial
 
       std::unique_ptr<sensor_msgs::msg::Imu> imu_msgs;
       std::atomic<bool> stop_thread_{false};
-      std::atomic<bool> calibrated_{false};
-      std::atomic<int> calibration_sample_count_{0};
-      static constexpr int CALIBRATION_SAMPLES = 100;
       IMU_Receive_Frame receive_data{};
       std::mutex data_mutex_;
       IMU_Data data{};
-
-      double roll_offset = 0.0, pitch_offset = 0.0, yaw_offset = 0.0;
-      bool calibrate_on_startup_ = true;
-      int calibration_samples_ = 100;
-      int calibration_timeout_ms_ = 5000;
-      bool publish_pose_ = false;
-      rclcpp::node_interfaces::OnSetParametersCallbackHandle::SharedPtr parameter_callback_handle_;
-      rclcpp::Service<dm_imu::srv::CalibrateIMU>::SharedPtr calibrate_service_;
 
     // 私有方法声明
     void enter_setting_mode();
@@ -121,12 +108,6 @@ namespace dmbot_serial
     void save_imu_para();
     void exit_setting_mode();
     void restart_imu();
-    void perform_calibration();
-    rcl_interfaces::msg::SetParametersResult on_parameter_change(
-        const std::vector<rclcpp::Parameter> &parameters);
-    void on_calibrate_imu(
-        const std::shared_ptr<dm_imu::srv::CalibrateIMU::Request> request,
-        std::shared_ptr<dm_imu::srv::CalibrateIMU::Response> response);
 };
 
 }
